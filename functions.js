@@ -51,7 +51,32 @@ Ball.prototype.checkWalls=function(x,y){
 	}	
 }
 
+
+
+
+
+//intialize Paddle Variables
+var paddleHeight = 10;
+var paddleWidth=75;
+var paddleX=(canvas.width-paddleWidth)/2;
+
+//Paddle constructor
+function Paddle(){
+	Paddle.prototype.drawPaddle(){
+		ctx.beginPath();
+		ctx.rect(paddleX,canvas.height-paddleHeight,paddleWidth,paddleHeight);
+		ctx.fillStyle="#0095DD";
+		ctx.fill();
+		ctx.closePath();
+	}
+}
+
 //instantiate objects
 var ball = new Ball();
-ball.refresh();
+
+//call methods
+function initialize(){	
+	ball.refresh();
+}
+
 //define paddle

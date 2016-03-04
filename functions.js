@@ -11,7 +11,8 @@ var dy=-2;//shift on y-axis
 var ballRadius = 10;
 var rightPressed = false;
 var leftPressed=false;
-
+var score=0;
+$('#winner').hide();
 function Ball(){
 
 	
@@ -34,14 +35,8 @@ Ball.prototype.draw=function(){
 
 	paddle.drawPaddle();//must be called in draw
 	paddle.movePaddle();//must be called in draw	
-	this.drawBall();
-
-	
-
-	
-	
-	
-	
+	this.drawBall();	
+	s.drawScore();
 	bricks.collisionDetection();
 	x+=dx;
 	y+=dy;
@@ -124,8 +119,17 @@ Paddle.prototype.keyUpHandler=function(e){
 		rightPressed=false;
 	}else if(e.keyCode==37){
 		leftPressed=false;
+	}	
+}
+
+/**
+*
+*/
+Paddle.prototype.mouseMoveHandler=function(e){
+	var relativeX=e.clientX - canvas.offsetLeft;
+	if(relativeX > 0 && relativeX < canvas.width){
+		paddleX=relativeX-paddleWidth/2;
 	}
-	
 }
 
 Paddle.prototype.movePaddle=function(){
@@ -209,6 +213,13 @@ Bricks.prototype.collisionDetection=function(){
 					console.log("I've been hit");
 					dy=-dy;
 					b.status=0;
+					score++;//add points each time block is hit
+
+					//check if winner
+					if(score==brickRowCount*brickColumnCount){
+						$('#winner').show();
+						//document.location.reload();
+					}
 					
 				}
 			}
@@ -216,21 +227,43 @@ Bricks.prototype.collisionDetection=function(){
 	}
 }
 
+
+
+/**
+*Score class
+*/
+
+
+function Score(){
+
+}
+Score.prototype.drawScore=function(){
+	ctx.font="16px Arial";
+	ctx.fillStyle="#0095DD";
+	ctx.fillText("Score: "+ score,8,20);
+}
+
+
 //instantiate functions (classes)
 var ball = new Ball();
 var paddle = new Paddle();//called in draw method
 var bricks = new Bricks();//called in draw method
+var s = new Score();
 //call methods
 function initialize(){
 	bricks.generateBricks();
+	
 
 	
 	document.addEventListener("keydown", paddle.keyDownHandler, false);
-	document.addEventListener("keyup", paddle.keyUpHandler, false);	
-	
+	document.addEventListener("keyup", paddle.keyUpHandler, false);
+	document.addEventListener("mousemove",paddle.mouseMoveHandler,false);
+	s.drawScore();
 	ball.refresh();
 
 	bricks.drawBricks();
+
+
 	
 }
 initialize();

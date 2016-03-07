@@ -7,17 +7,20 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Evntit">
     <meta name="author" content="Michael Quattrochi">
-    <title>OOP Quiz Javascript</title>
+    <title>Block out game</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+
 <div class="container">
 	<div  class="row">
 			
 			<canvas id="myCanvas" class="img-responsive" width=480 height=320></canvas>
-			<div id="winner"><h1>You win!</div>
+			<div id="start" class="col-xs-12"><button onclick=start(); type="button" class="btn btn-default btn-success center-block">Play!</button></div>
+			<div class="col-xs-12" id="winner"><h1>You win!</div>
+			
 			
 	</div>
 </div>
@@ -31,13 +34,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <p>Game over!</p>
       </div>
       <div class="modal-footer">
-        <button id="closeModa" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 

@@ -219,13 +219,13 @@ function draw(){
 	requestAnimationFrame(draw);
 }
 
-function initialize(){
-	$('#winner').hide();
+function start(){
+	
 	document.addEventListener("keydown", paddle.keyDownHandler, false);
 	document.addEventListener("keyup", paddle.keyUpHandler, false);
 	document.addEventListener("mousemove",paddle.mouseMoveHandler,false);
 	bricks.generateBricks();	
 	draw();
 }
-
-initialize();
+$('#winner').hide();
+//start();
